@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
@@ -8,7 +8,7 @@ import ProductPage from './pages/ProductPage';
 import OccasionPage from './pages/OccasionPage';
 import DetailPage from './pages/DetailPage';
 import Navigation from './components/Navigation';
-import OccasionProductPage from './pages/OccasionProductPage';
+import ProductByOccasionPage from './pages/ProductByOccasionPage';
 import Loading from './components/Loading';
 import './App.css';
 
@@ -17,14 +17,12 @@ function App() {
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    // TODO: dispatch() | logout()
+    // TODO: dispatch async to logout | asyncUnsetAuthUser()
     dispatch();
   };
 
   useEffect(() => {
-    // TODO: dispatch() | getAllProduct
-    // TODO: dispatch() | getAllCategory
-    dispatch();
+    // TODO: dispatch async action to preload app | asyncPreloadProcess()
     dispatch();
   }, [dispatch]);
 
@@ -59,8 +57,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/product" element={<ProductPage />} />
             <Route path="/occasion" element={<OccasionPage />} />
-            <Route path="/product/:id" element={<DetailPage />} />
-            <Route path="/occasion/:category" element={<OccasionProductPage />} />
+            <Route path="/product/:productId" element={<DetailPage />} />
+            <Route path="/occasion/:occasionId" element={<ProductByOccasionPage />} />
           </Routes>
         </main>
       </div>

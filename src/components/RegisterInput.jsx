@@ -17,7 +17,7 @@ function RegisterInput({ register }) {
           onChange={onPasswordChange}
           placeholder="type strong password"
         />
-        <button type="button" onClick={() => register({ name, id, password })}>
+        <button type="button" onClick={() => register({ name, email, password })}>
           Register
         </button>
       </form>

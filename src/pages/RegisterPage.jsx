@@ -7,15 +7,17 @@ function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onRegister = ({ nama, email, password, jenisKelamin = 1 }) => {
-    // TODO: dispatch() asyncAddUser
-    dispatch();
+  const onRegister = ({ nama, email, password, jenis_kelamin = 1 }) => {
+    dispatch(); // TODO: dispatch action async to register | asyncRegisterUser({...})
     navigate('/');
   };
   return (
     <>
       <section className="register-page">
         <RegisterInput register={onRegister} />
+        <p>
+          Sudah Punya Akun ? <Link to={'/register'}>Register</Link>
+        </p>
       </section>
     </>
   );
