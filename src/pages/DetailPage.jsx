@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 function DetailPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { detailProduct } = useSelector((states) => states);
+  const { productDetail = null } = useSelector((states) => states);
   const dispatch = useDispatch;
 
   useEffect(() => {
-    // TODO: dispatch async action to get detail product (use productId) | asyncReceiveDetailProduct(productId)
+    // TODO: dispatch async action to get detail product (use productId) | asyncReceiveProductDetail(productId)
   }, [dispatch]);
 
   const onBuyHandler = (event) => {
@@ -20,20 +20,24 @@ function DetailPage() {
     navigate('/');
   };
 
+  if (!productDetail) {
+    return null;
+  }
+
   return (
     <>
       <div className="detail-product-page">
         <h2>Halaman Detail Produk</h2>
-        <h3>Judul : Bunga {detailProduct.name}</h3>
-        <img src={detailProduct.gambar} alt={detailProduct.nama} />
+        <h3>Judul : Bunga {productDetail.name}</h3>
+        <img src={productDetail.gambar} alt={productDetail.nama} />
         <p>
           Deskripsi : Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore consequatur
           eos iusto numquam vel! Laborum ea officiis iste voluptatum incidunt doloribus dolore enim
           velit, alias hic eos molestiae explicabo architecto.
         </p>
-        <p>Category : {detailProduct.kategori_produk.nama}</p>
-        <p>Stock : {detailProduct.jumlah_stock}</p>
-        <p>Harga : {detailProduct.harga}</p>
+        <p>Category : {productDetail.kategori_produk.nama}</p>
+        <p>Stock : {productDetail.jumlah_stock}</p>
+        <p>Harga : {productDetail.harga}</p>
         <button onClick={onBuyHandler}>BUY</button>
       </div>
     </>

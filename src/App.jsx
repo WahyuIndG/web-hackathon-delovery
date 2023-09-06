@@ -18,12 +18,10 @@ function App() {
 
   const onLogout = () => {
     // TODO: dispatch async to logout | asyncUnsetAuthUser()
-    dispatch();
   };
 
   useEffect(() => {
     // TODO: dispatch async action to preload app | asyncPreloadProcess()
-    dispatch();
   }, [dispatch]);
 
   if (isPreload) {

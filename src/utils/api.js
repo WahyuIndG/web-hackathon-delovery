@@ -72,9 +72,7 @@ const api = (() => {
 
   async function getOwnProfile() {
     const response = await _fetchWithAuth(`${BASE_URL}/api/auth/me`);
-
     const responseJson = await response.json();
-
     const { user, message } = responseJson;
 
     // krn tdk ada response status, maka dgunakan user sebgai pertimbagan
@@ -198,6 +196,32 @@ const api = (() => {
     return allData;
   }
 
+  async function getRecomProducts() {
+    const response = await fetch(`${BASE_URL}/api/produk?page=20`);
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== true) {
+      throw new Error(message);
+    }
+
+    const { data } = responseJson;
+    return data.data;
+  }
+
+  async function getSeveralOccasions() {
+    const response = await fetch(`${BASE_URL}/api/kategori-produk?page=1`);
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== true) {
+      throw new Error(message);
+    }
+
+    const { data } = responseJson;
+    return data.data;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -205,6 +229,13 @@ const api = (() => {
     login,
     getOwnProfile,
     getAllProducts,
+    getProductsByOccasion,
+    getProductsByCity,
+    getDetailProduct,
+    getAllCities,
+    getAllOccasions,
+    getRecomProducts,
+    getSeveralOccasions,
   };
 })();
 
