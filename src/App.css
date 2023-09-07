@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --accent-color: #00796b;
+  --foreground-color: #0f1419;
+  --background-color: white;
+  --gray-dark-color: #66757f;
+  --gray-light-color: #edeff1;
+}
+
 .loading {
   position: sticky;
   top: 0;
@@ -14,4 +22,10 @@
   cursor: pointer;
   border: 1px solid gray;
   margin: 5px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
 }

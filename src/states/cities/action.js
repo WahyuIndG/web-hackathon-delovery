@@ -19,12 +19,16 @@ function receiveCitiesActionCreator(cities) {
 // dpanggil di useEffect (ProductPage.jsx, ProductByOccasion.jsx)
 function asyncReceiveCities() {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const cities = await api.getAllCities();
       dispatch(receiveCitiesActionCreator(cities));
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 

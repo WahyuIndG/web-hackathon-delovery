@@ -5,7 +5,7 @@ asyncSetAuthUser()
 asyncUnsetAuthUser()
  */
 
-// import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -36,17 +36,23 @@ function unsetAuthUserActionCreator() {
 // dipanggil di saat Register (RegisterPage.jsx)
 function asyncRegisterUser({ email, nama, password, jenis_kelamin }) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       await api.register({ email, nama, password, jenis_kelamin });
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 // dipanggil di saat Login (LoginPage.jsx)
 function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const token = await api.login({ email, password });
 
@@ -58,6 +64,8 @@ function asyncSetAuthUser({ email, password }) {
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 

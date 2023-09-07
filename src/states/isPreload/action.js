@@ -1,5 +1,6 @@
 // import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { setAuthUserActionCreator } from '../authUser/action';
 
 const ActionType = {
@@ -20,6 +21,8 @@ function setIsPreloadActionCreator(isPreload) {
 // dipanggil di useEffect() (App.jsx)
 function asyncPreloadProcess() {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       // preload process
       const authUser = await api.getOwnProfile();
@@ -31,6 +34,8 @@ function asyncPreloadProcess() {
       // end preload process
       dispatch(setIsPreloadActionCreator(false));
     }
+
+    dispatch(hideLoading());
   };
 }
 

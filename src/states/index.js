@@ -7,6 +7,7 @@ import productDetailReducer from './productDetail/reducer';
 import productsReducer from './products/reducer';
 import recomProductsReducer from './recomProducts/reducer';
 import severalOccasionsReducer from './severalOccasions/reducer';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     products: productsReducer,
     recomProducts: recomProductsReducer,
     severalOccasions: severalOccasionsReducer,
+    loadingBar: loadingBarReducer,
   },
 });
 

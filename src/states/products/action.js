@@ -1,13 +1,3 @@
-/*
-receiveProductsActionCreator(products)         Digunakan saat  halaman produk/    
-receiveProductsByOccasion(product)             Digunakan saat  halaman occasion/wisuda/
-receiveFilteredProductsActionCreator(products)
-asyncReceiveProducts()
-asyncReceiveProductsByOccasion()
-asyncReceiveFilteredProducts(cityId) => dibuat percabangan kalo cityId == 1 pake API  getProductsByCity(cityId)
-                                                           kalo cityId == ‘’ pake API getAllProducts()
-*/
-
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 
@@ -49,41 +39,55 @@ function receiveFilteredProductsByCityActionCreator(products) {
 // dipanggil di useEffect() (ProductPage.jsx, ProductByOccasion.jsx)
 function asyncReceiveAllProducts() {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const products = await api.getAllProducts();
       dispatch(receiveAllProductsActionCreator(products));
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 // dipanggil di useEffect() (ProductByOccasionPage.jsx)
 function asyncReceiveFilteredProductsByOccasion(occasionId) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const products = await api.getProductsByOccasion(occasionId);
       dispatch(receiveFilteredProductsByOccasionActionCreator(products));
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 // dipanggil saat onCityChange() (ProductPage.jsx, ProductByOccasionPage.jsx)
 function asyncReceiveFilteredProductsByCity(cityId) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       if (cityId === 'all') {
         const products = await api.getAllProducts();
+        console.log(products);
         dispatch(receiveFilteredProductsByCityActionCreator(products));
       } else {
         const products = await api.getProductsByCity(cityId);
+        console.log(products);
         dispatch(receiveFilteredProductsByCityActionCreator(products));
       }
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 

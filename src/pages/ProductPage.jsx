@@ -15,7 +15,7 @@ function ProductPage() {
     // TODO: dispatch() async action to getAllProducts()  => semua products
     dispatch(asyncReceiveAllProducts());
     // TODO: dispatch() async action to getAllCities() => dptin kota-kota
-    dispatch(asyncReceiveCities());
+    // dispatch(asyncReceiveCities());
   }, [dispatch]);
 
   const onCityChange = ({ target }) => {
@@ -27,8 +27,6 @@ function ProductPage() {
     return null;
   }
 
-  console.log(cities);
-
   return (
     <>
       <div className="product-page">
@@ -37,11 +35,16 @@ function ProductPage() {
         <section className="section-list">
           <select onChange={onCityChange}>
             <option value="all">all</option>
-            {cities.map((city) => (
+            <option value="1">kota Banda Aceh</option>
+            <option value="2">kota Sabang</option>
+            <option value="3">Kota Lhokseumawe</option>
+            <option value="4">Kota Langsa</option>
+            <option value="5">Kota Subulussalam</option>
+            {/* {cities.map((city) => (
               <option key={city.id} value={city.id}>
-                {city.name}
+                {city.nama}
               </option>
-            ))}
+            ))} */}
           </select>
 
           <ProductList products={products} />

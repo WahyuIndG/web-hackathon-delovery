@@ -26,6 +26,8 @@ function clearProductDetailActionCreator() {
 // dpanggil di useEffect (DetailPage.jsx)
 function asyncReceiveProductDetail(productId) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     // clean old value of productDetail before upadate with new value
     dispatch(clearProductDetailActionCreator());
 
@@ -35,6 +37,8 @@ function asyncReceiveProductDetail(productId) {
     } catch (error) {
       console.log(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 

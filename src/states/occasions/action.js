@@ -1,4 +1,4 @@
-// import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -19,12 +19,16 @@ function receiveOccasionsActionCrator(occasions) {
 // dipanggil di useEffect (OccasionPage.jsx)
 function asyncReceiveOccasions() {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const occasions = await api.getAllOccasions();
       dispatch(receiveOccasionsActionCrator(occasions));
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }
+
+    dispatch(hideLoading());
   };
 }
 

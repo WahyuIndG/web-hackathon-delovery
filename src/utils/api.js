@@ -106,7 +106,7 @@ const api = (() => {
       data: { last_page },
     } = responseJson;
 
-    for (let i = 1; i <= last_page; i++) {
+    for (let i = 1; i <= 5; i++) {
       const response = await fetch(`${BASE_URL}/api/produk?page=${i}`);
       const { data } = await response.json();
       allData = allData.concat(data.data);
@@ -147,18 +147,19 @@ const api = (() => {
       throw new Error(message);
     }
 
-    let allData = [];
-    const {
-      data: { last_page },
-    } = responseJson;
+    // let allData = [];
+    // const {
+    //   data: { last_page },
+    // } = responseJson;
 
-    for (let i = 1; i <= last_page; i++) {
-      const response = await fetch(`${BASE_URL}/api/produk?kota=${cityId}&page=${i}`);
-      const { data } = await response.json();
-      allData = allData.concat(data.data);
-    }
+    // for (let i = 1; i <= last_page; i++) {
+    //   const response = await fetch(`${BASE_URL}/api/produk?kota=${cityId}&page=${i}`);
+    //   const { data } = await response.json();
+    //   allData = allData.concat(data.data.produk);
+    // }
 
-    return allData;
+    const { data } = responseJson;
+    return data.data[0].produk;
   }
 
   async function getDetailProduct(productId) {
@@ -194,8 +195,6 @@ const api = (() => {
       const { data } = await response.json();
       allData = allData.concat(data.data);
     }
-
-    console.log(allData);
 
     return allData;
   }
