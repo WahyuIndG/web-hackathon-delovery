@@ -11,6 +11,8 @@ import Navigation from './components/Navigation';
 import ProductByOccasionPage from './pages/ProductByOccasionPage';
 import Loading from './components/Loading';
 import './App.css';
+import { asyncUnsetAuthUser } from './states/authUser/action';
+import { asyncPreloadProcess } from './states/isPreload/action';
 
 function App() {
   const { isPreload = false, authUser = null } = useSelector((states) => states);
@@ -18,18 +20,21 @@ function App() {
 
   const onLogout = () => {
     // TODO: dispatch async to logout | asyncUnsetAuthUser()
+    dispatch(asyncUnsetAuthUser());
   };
 
   useEffect(() => {
     // TODO: dispatch async action to preload app | asyncPreloadProcess()
+    dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
   if (isPreload) {
-    console.log('(App.jsx) App is preloading..');
+    console.log('App return null');
     return null;
   }
 
   if (authUser === null) {
+    console.log('App return pages (Login & Register)');
     return (
       <>
         <Loading />
@@ -45,6 +50,7 @@ function App() {
 
   return (
     <>
+      {console.log('App return pages')}
       <Loading />
       <div className="app-container">
         <header>

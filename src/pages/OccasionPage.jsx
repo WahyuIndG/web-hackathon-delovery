@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import OccasionList from '../components/OccasitonList';
+import { asyncReceiveOccasions } from '../states/occasions/action';
 
 function OccasionPage() {
   const { occasions = [] } = useSelector((states) => states);
@@ -8,12 +9,14 @@ function OccasionPage() {
 
   useEffect(() => {
     // TODO: dispatch() async action to get list of occasion | asyncReceiveOccasion()
-    dispatch();
+    dispatch(asyncReceiveOccasions());
   }, [dispatch]);
 
   if (occasions.length === 0) {
     return null;
   }
+
+  console.log('disini halaman occasion');
 
   return (
     <>

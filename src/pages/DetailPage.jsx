@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { asyncReceiveProductDetail } from '../states/productDetail/action';
 
 function DetailPage() {
   const { productId } = useParams();
@@ -11,7 +12,8 @@ function DetailPage() {
 
   useEffect(() => {
     // TODO: dispatch async action to get detail product (use productId) | asyncReceiveProductDetail(productId)
-  }, [dispatch]);
+    dispatch(asyncReceiveProductDetail(productId));
+  }, [dispatch, productId]);
 
   const onBuyHandler = (event) => {
     event.preventDefault();

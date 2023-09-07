@@ -34,10 +34,10 @@ function unsetAuthUserActionCreator() {
 // THUNK
 
 // dipanggil di saat Register (RegisterPage.jsx)
-function asyncRegisterUser({ email, name, password, jenis_kelamin }) {
+function asyncRegisterUser({ email, nama, password, jenis_kelamin }) {
   return async (dispatch) => {
     try {
-      await api.register({ email, name, password, jenis_kelamin });
+      await api.register({ email, nama, password, jenis_kelamin });
     } catch (error) {
       alert(`failed to fetch | error : ${error}`);
     }

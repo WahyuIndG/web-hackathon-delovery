@@ -7,7 +7,7 @@ function LoginInput({ login }) {
   return (
     <>
       <form className="login-input">
-        <input type="text" value={email} onChange={onEmailChange} placeholder="Username" />
+        <input type="text" value={email} onChange={onEmailChange} placeholder="Email" />
         <input
           type="password"
           value={password}

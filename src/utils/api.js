@@ -19,14 +19,14 @@ const api = (() => {
     });
   }
 
-  async function register({ email, name, password, jenis_kelamin }) {
+  async function register({ email, nama, password, jenis_kelamin }) {
     const response = await fetch(`${BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name,
+        nama,
         email,
         password,
         jenis_kelamin,
@@ -71,7 +71,11 @@ const api = (() => {
   }
 
   async function getOwnProfile() {
-    const response = await _fetchWithAuth(`${BASE_URL}/api/auth/me`);
+    const response = await _fetchWithAuth(`${BASE_URL}/api/auth/me`, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
     const responseJson = await response.json();
     const { user, message } = responseJson;
 
@@ -79,6 +83,7 @@ const api = (() => {
     // API 200 => user: {...}
     // API 401 => tidak ada prop user, hanya ada prop message: "..."
     if (!user) {
+      console.log(message);
       throw new Error(message);
     }
 
@@ -181,19 +186,9 @@ const api = (() => {
     if (status !== true) {
       throw new Error(message);
     }
+    const { data } = responseJson;
 
-    const allData = [];
-    const {
-      data: { last_page },
-    } = responseJson;
-
-    for (let i = 1; i <= last_page; i++) {
-      const response = await fetch(`${BASE_URL}/api/kota_pengiriman?page=${i}`);
-      const { data } = await response.json();
-      allData.concat(data.data);
-    }
-
-    return allData;
+    return data;
   }
 
   async function getRecomProducts() {

@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductList from '../components/ProductList';
+import {
+  asyncReceiveFilteredProductsByCity,
+  asyncReceiveFilteredProductsByOccasion,
+} from '../states/products/action';
+import { asyncReceiveCities } from '../states/cities/action';
 
 // ! delovery.com/occasion/pernikahan/
 // ! delovery.com/occasion/wisuda/
@@ -14,11 +19,14 @@ function ProductByOccasionPage() {
 
   useEffect(() => {
     // TODO: dispatch async action to get products by occasion | asyncReceiveProductsByOccasion(occasionId)
+    dispatch(asyncReceiveFilteredProductsByOccasion(occasionId));
     // TODO: dispatch async action to get list of city | asyncReceiveCities()
-  }, [dispatch]);
+    // dispatch(asyncReceiveCities());
+  }, [dispatch, occasionId]);
 
   const onCityChange = ({ target }) => {
     // TODO: dispatch async action to get filtered products by city| asyncReceiveProductsByCity(target.value)  |  atur di action creator utk buat percabangan
+    // dispatch(asyncReceiveFilteredProductsByCity(target.value));
   };
 
   if (products.length === 0) {

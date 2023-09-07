@@ -17,7 +17,7 @@ const store = configureStore({
     productDetail: productDetailReducer,
     products: productsReducer,
     recomProducts: recomProductsReducer,
-    severalProducts: severalOccasionsReducer,
+    severalOccasions: severalOccasionsReducer,
   },
 });
 

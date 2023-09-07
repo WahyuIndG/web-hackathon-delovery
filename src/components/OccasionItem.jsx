@@ -20,7 +20,7 @@ function OccasionItem({ nama, gambar, jumlah_stok }) {
         className="occasion-item"
         onClick={onOccasionClick}
         onKeyDown={onOccasionPress}
-        role={button}
+        role="button"
         tabIndex={0}
       >
         <h3>{nama}</h3>
