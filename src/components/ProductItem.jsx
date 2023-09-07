@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { asyncReceiveCities } from '../states/cities/action';
+import { asyncReceiveOccasions } from '../states/occasions/action';
 
-function ProductItem({
-  id,
-  nama,
-  kategori_produk,
-  harga,
-  gambar,
-  jumlah_stok,
-  kota = 'Seluruh Kota',
-}) {
+function ProductItem({ id, nama, kategori_produk_id, harga, gambar, jumlah_stok }) {
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const { occasions = [] } = useSelector((states) => states);
 
   const onProductClick = () => {
     navigate(`/product/${id}`);
@@ -21,6 +18,10 @@ function ProductItem({
       navigate(`/product/${id}`);
     }
   };
+
+  // useEffect(() => {
+  //   dispatch(asyncReceiveOccasions());
+  // }, []);
 
   return (
     <>
@@ -33,8 +34,12 @@ function ProductItem({
       >
         <h3>{nama}</h3>
         <img src={gambar} alt={nama} />
-        <p>Kota : {kota}</p>
-        <p>Cocok utk Momen : {kategori_produk}</p>
+        {/* <p>
+          Cocok utk Momen :{' '}
+          {occasions.find((occasion) => {
+            if (occasion.id === kategori_produk_id) return occasion.name;
+          })}
+        </p> */}
         <p>Stock Tersedia : {jumlah_stok}</p>
         <p>Price : Rp.{harga}</p>
       </div>

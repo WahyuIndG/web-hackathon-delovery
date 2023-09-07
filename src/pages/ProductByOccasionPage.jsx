@@ -7,6 +7,7 @@ import {
   asyncReceiveFilteredProductsByOccasion,
 } from '../states/products/action';
 import { asyncReceiveCities } from '../states/cities/action';
+import { asyncReceiveOccasions } from '../states/occasions/action';
 
 // ! delovery.com/occasion/pernikahan/
 // ! delovery.com/occasion/wisuda/
@@ -14,7 +15,7 @@ import { asyncReceiveCities } from '../states/cities/action';
 
 function ProductByOccasionPage() {
   const { occasionId } = useParams();
-  const { products = [], cities = [] } = useSelector((states) => states);
+  const { products = [], cities = [], occasions = [] } = useSelector((states) => states);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function ProductByOccasionPage() {
   return (
     <>
       <div className="product-by-occasion-page">
-        <h2>Halaman Produk utk {name}</h2>
+        <h2>Halaman Produk utk Kategori {occasionId}</h2>
 
         <section className="list-section">
           <select onChange={onCityChange}>

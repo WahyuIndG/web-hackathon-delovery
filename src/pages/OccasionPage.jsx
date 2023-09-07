@@ -16,8 +16,6 @@ function OccasionPage() {
     return null;
   }
 
-  console.log('disini halaman occasion');
-
   return (
     <>
       <div className="occasion-page">

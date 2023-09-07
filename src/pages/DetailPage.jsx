@@ -8,7 +8,7 @@ function DetailPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { productDetail = null } = useSelector((states) => states);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // TODO: dispatch async action to get detail product (use productId) | asyncReceiveProductDetail(productId)
@@ -25,12 +25,11 @@ function DetailPage() {
   if (!productDetail) {
     return null;
   }
-
   return (
     <>
       <div className="detail-product-page">
         <h2>Halaman Detail Produk</h2>
-        <h3>Judul : Bunga {productDetail.name}</h3>
+        <h3>Judul : Bunga {productDetail.nama}</h3>
         <img src={productDetail.gambar} alt={productDetail.nama} />
         <p>
           Deskripsi : Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore consequatur
@@ -38,7 +37,7 @@ function DetailPage() {
           velit, alias hic eos molestiae explicabo architecto.
         </p>
         <p>Category : {productDetail.kategori_produk.nama}</p>
-        <p>Stock : {productDetail.jumlah_stock}</p>
+        <p>Stock : {productDetail.jumlah_stok}</p>
         <p>Harga : {productDetail.harga}</p>
         <button onClick={onBuyHandler}>BUY</button>
       </div>
@@ -47,18 +46,3 @@ function DetailPage() {
 }
 
 export default DetailPage;
-
-/**
-    "data": {
-        "id": 1,
-        "kategori_produk_id": 4,
-        "nama": "illo",
-        "harga": 2356,
-        "jumlah_stok": 248,
-        "gambar": null,
-
-        "kategori_produk": {
-            "id": 4,
-            "nama": "autem",
-    }
- */

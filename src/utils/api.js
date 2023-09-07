@@ -24,6 +24,7 @@ const api = (() => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Acceept: 'application/json',
       },
       body: JSON.stringify({
         nama,
@@ -50,6 +51,7 @@ const api = (() => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Acceept: 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -99,7 +101,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const allData = [];
+    let allData = [];
     const {
       data: { last_page },
     } = responseJson;
@@ -107,7 +109,7 @@ const api = (() => {
     for (let i = 1; i <= last_page; i++) {
       const response = await fetch(`${BASE_URL}/api/produk?page=${i}`);
       const { data } = await response.json();
-      allData.concat(data.data);
+      allData = allData.concat(data.data);
     }
 
     return allData;
@@ -122,13 +124,22 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const { data } = responseJson;
+    let allData = [];
+    const {
+      data: { last_page },
+    } = responseJson;
 
-    return data.data;
+    for (let i = 1; i <= last_page; i++) {
+      const response = await fetch(`${BASE_URL}/api/produk?kategori=${occasionId}&page=${i}`);
+      const { data } = await response.json();
+      allData = allData.concat(data.data);
+    }
+
+    return allData;
   }
 
   async function getProductsByCity(cityId) {
-    const response = await fetch(`${BASE_URL}/api/kota=${cityId}`);
+    const response = await fetch(`${BASE_URL}/api/produk?kota=${cityId}`);
     const responseJson = await response.json();
     const { status, message } = responseJson;
 
@@ -136,9 +147,18 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const { data } = responseJson;
+    let allData = [];
+    const {
+      data: { last_page },
+    } = responseJson;
 
-    return data.data;
+    for (let i = 1; i <= last_page; i++) {
+      const response = await fetch(`${BASE_URL}/api/produk?kota=${cityId}&page=${i}`);
+      const { data } = await response.json();
+      allData = allData.concat(data.data);
+    }
+
+    return allData;
   }
 
   async function getDetailProduct(productId) {
@@ -164,7 +184,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const allData = [];
+    let allData = [];
     const {
       data: { last_page },
     } = responseJson;
@@ -172,8 +192,10 @@ const api = (() => {
     for (let i = 1; i <= last_page; i++) {
       const response = await fetch(`${BASE_URL}/api/kategori-produk?page=${i}`);
       const { data } = await response.json();
-      allData.concat(data.data);
+      allData = allData.concat(data.data);
     }
+
+    console.log(allData);
 
     return allData;
   }
@@ -188,7 +210,14 @@ const api = (() => {
     }
     const { data } = responseJson;
 
-    return data;
+    let resultCities = [];
+
+    // karna kota cukup banyak, maka inisiatif dibatasi hingga max 15 kota
+    for (let i = 1; i <= 15; i++) {
+      resultCities.push(data[i]);
+    }
+
+    return resultCities;
   }
 
   async function getRecomProducts() {

@@ -8,3 +8,10 @@
   position: sticky;
   top: 0;
 }
+
+.occasion-item,
+.product-item {
+  cursor: pointer;
+  border: 1px solid gray;
+  margin: 5px;
+}

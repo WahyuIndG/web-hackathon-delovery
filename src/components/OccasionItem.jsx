@@ -1,16 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function OccasionItem({ nama, gambar, jumlah_stok }) {
+function OccasionItem({ id, nama, gambar, jumlah_stok }) {
   const navigate = useNavigate();
 
   const onOccasionClick = () => {
-    navigate(`/occasion/${nama}`);
+    navigate(`/occasion/${id}`);
   };
 
   const onOccasionPress = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      navigate(`/occasion/${nama}`);
+      navigate(`/occasion/${id}`);
     }
   };
 
